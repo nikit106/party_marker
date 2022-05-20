@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:party_maker/route_generators.dart';
 
 import 'blocs/blocs.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(const App()
-      );
+  runApp(const App());
 }
 
 class App extends StatelessWidget {
@@ -16,29 +16,26 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-              localizationsDelegates: const [
-          // GlobalMaterialLocalizations.delegate,
-          // GlobalWidgetsLocalizations.delegate,
-          // GlobalCupertinoLocalizations.delegate,
-        ],
+      onGenerateRoute: RouteGenerator.generateRoute,
+      localizationsDelegates: const [],
       home: BlocProvider<AuthenticationBloc>(
-          create: (context) => AuthenticationBloc()..add(AppStarted()),
-          child: Scaffold(
-            body: BlocConsumer<AuthenticationBloc, AuthenticationState>(
+        create: (context) => AuthenticationBloc()..add(AppStarted()),
+        child: Scaffold(
+          body: BlocConsumer<AuthenticationBloc, AuthenticationState>(
               listener: (context, state) {
-                if (state.listener == 'login') {
-                  print('1');
-                }
-                if (state.listener == 'home') {
-                  print('2');
-                }
-              },
-              builder: (context, state) {
-                return Text('1');
-              }
-            ),
-          ),
+            if (state.listener == 'authentication') {
+              print('1');
+              Navigator.of(context).pushNamed('/authentication');
+            }
+            if (state.listener == 'home') {
+              print('2');
+              Navigator.of(context).pushNamed('/home');
+            }
+          }, builder: (context, state) {
+            return Text('1');
+          }),
         ),
+      ),
     );
     //   child: MaterialApp(
     //     // builder: DevicePreview.appBuilder as Widget Function(BuildContext, Widget?),

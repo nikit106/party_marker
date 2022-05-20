@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:party_maker/services/authentication/authentication.dart';
+import 'package:party_maker/services/service.dart';
 
 import './bloc.dart';
 
@@ -19,7 +19,7 @@ class AuthenticationBloc
   _checkFastEntry(AppStarted event, Emitter<AuthenticationState> emit) async {
     bool isFastEntry = authenticationService.checkFastEntry();
     emit(AuthenticationState.open(
-      listener: isFastEntry ? 'home' : 'login',
+      listener: isFastEntry ? 'home' : 'authentication',
     ));
   }
 }
