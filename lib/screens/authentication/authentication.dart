@@ -105,70 +105,103 @@ class Circle extends CustomPainter {
 class MyShape extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint1 = Paint();
-    paint1.color = Colors.green;
-    paint1.style = PaintingStyle.fill;
-    paint1.strokeCap = StrokeCap.round;
-    paint1.strokeJoin = StrokeJoin.round;
+    final pathLeftBottom = Path()
+      ..moveTo(0, size.height * 0.9)
+      ..quadraticBezierTo(
+          size.width *
+              0.14, // максимальное значение по горизонтале наивышей точки
+          size.height *
+              0.75, // максимальное значение по вертикале наивышей точки
+          size.width * 0.34, // конечная точка по горизонтале
+          size.height // конечная точка по вертикале
+          );
 
-    Offset offset = Offset(size.width * 0.81, size.height * 0.86);
-    canvas.drawCircle(offset, 7, paint1);
+    final paintLeftBottom = Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2;
+    canvas.drawPath(pathLeftBottom, paintLeftBottom);
 
-    final path = Path()
+    final pathRightBottomSmall = Path()
+      ..moveTo(size.width, size.height * 0.87)
+      ..quadraticBezierTo(
+          size.width *
+              0.91, // максимальное значение по горизонтале наивышей точки
+          size.height *
+              0.81, // максимальное значение по вертикале наивышей точки
+          size.width * 0.86, // конечная точка по горизонтале
+          size.height * 0.86 // конечная точка по вертикале
+          )
+      ..quadraticBezierTo(
+          size.width *
+              0.82, // максимальное значение по горизонтале наивышей точки
+          size.height *
+              0.9, // максимальное значение по вертикале наивышей точки
+          size.width * 0.8, // конечная точка по горизонтале
+          size.height * 0.91 // конечная точка по вертикале
+          )
+      ..lineTo(
+        size.width * 0.67,
+        size.height * 0.95,
+      )
+      ..quadraticBezierTo(
+          size.width *
+              0.64, // максимальное значение по горизонтале наивышей точки
+          size.height *
+              0.96, // максимальное значение по вертикале наивышей точки
+          size.width * 0.64, // конечная точка по горизонтале
+          size.height // конечная точка по вертикале
+          );
+
+    final paintRightBottomSmall = Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2;
+    canvas.drawPath(pathRightBottomSmall, paintRightBottomSmall);
+    final pathRightBottomBig = Path()
       ..moveTo(size.width, size.height * 0.8)
       ..quadraticBezierTo(
           size.width *
               0.9, // максимальное значение по горизонтале наивышей точки
           size.height *
               0.75, // максимальное значение по вертикале наивышей точки
-          size.width * 0.86, // конечная точка по горизонтале
+          size.width * 0.84, // конечная точка по горизонтале
           size.height * 0.8 // конечная точка по вертикале
           )
       ..lineTo(
-        size.width * 0.81,
-        size.height * 0.86,
+        size.width * 0.77,
+        size.height * 0.87,
       )
       ..quadraticBezierTo(
           size.width *
-              0.79, // максимальное значение по горизонтале наивышей точки
+              0.61, // максимальное значение по горизонтале наивышей точки
           size.height *
-              0.87, // максимальное значение по вертикале наивышей точки
-          size.width * 0.73, // конечная точка по горизонтале
-          size.height * 0.89 // конечная точка по вертикале
-          )
-      // ..lineTo(
-      //   size.width * 0.74,
-      //   size.height * 0.90,
-      // )
-      ..quadraticBezierTo(
-          size.width *
-              0.65, // максимальное значение по горизонтале наивышей точки
-          size.height *
-              0.91, // максимальное значение по вертикале наивышей точки
-          size.width * 0.65, // конечная точка по горизонтале
-          size.height * 0.91 // конечная точка по вертикале
-          )
-      ..quadraticBezierTo(
-          size.width *
-              0.65, // максимальное значение по горизонтале наивышей точки
-          size.height *
-              0.90, // максимальное значение по вертикале наивышей точки
+              0.9, // максимальное значение по вертикале наивышей точки
           size.width * 0.6, // конечная точка по горизонтале
           size.height * 0.94 // конечная точка по вертикале
           )
-      // ..lineTo(
-      //   size.width * 0.61,
-      //   size.height,
-      // )
-      ;
+      ..lineTo(
+        size.width * 0.59,
+        size.height,
+      );
 
-    final paint = Paint()
+    final paintRightBig = Paint()
       ..color = Colors.white
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2;
-    canvas.drawPath(path, paint);
-     canvas.drawCircle(offset, 7, paint1);
-    // canvas.drawPath(path, paint1);
+    canvas.drawPath(pathRightBottomBig, paintRightBig);
+    Paint paintCircleBottom = Paint();
+    paintCircleBottom.color = Colors.white;
+    paintCircleBottom.style = PaintingStyle.fill;
+    paintCircleBottom.strokeCap = StrokeCap.round;
+    paintCircleBottom.strokeJoin = StrokeJoin.round;
+    canvas.drawCircle(Offset(size.width * 0.77, size.height * 0.87), 7, paintCircleBottom);
+    Paint paintCircleTop = Paint();
+    paintCircleTop.color = Colors.white;
+    paintCircleTop.style = PaintingStyle.fill;
+    paintCircleTop.strokeCap = StrokeCap.round;
+    paintCircleTop.strokeJoin = StrokeJoin.round;
+    canvas.drawCircle(Offset(size.width * 0.27, size.height * 0.22), 7, paintCircleTop);
   }
 
   @override
