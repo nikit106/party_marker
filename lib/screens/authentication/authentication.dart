@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:party_maker/blocs/blocs.dart';
 import 'package:party_maker/ui_elements/uiElements.dart';
+import 'package:path_drawing/path_drawing.dart';
 
 class AuthenticationScreen extends StatefulWidget {
   const AuthenticationScreen();
@@ -33,6 +34,67 @@ class AuthenticationScreenState extends State<AuthenticationScreen>
         body: BlocConsumer<AuthenticationBloc, AuthenticationState>(
           listener: (BuildContext context, AuthenticationState state) {},
           builder: (BuildContext context, AuthenticationState state) {
+            return CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  automaticallyImplyLeading: false,
+                  backgroundColor: const Color(0xffFA3855),
+                  floating: true,
+                  flexibleSpace: Stack(children: [
+                    Positioned(
+                      child: CustomPaint(
+                        painter: MyShape(),
+                        child: Container(),
+                      ),
+                    ),
+                    // Positioned(
+                    //   right: MediaQuery.of(context).size.width * 0.50,
+                    //   bottom: 90,
+                    //   child: RotationTransition(
+                    //     turns: const AlwaysStoppedAnimation(280 / 360),
+                    //     child: SvgPicture.asset(
+                    //       'assets/svg/figure1.svg',
+                    //     ),
+                    //   ),
+                    // ),
+                    // Positioned(
+                    //   left: 30,
+                    //   top: 130,
+                    //   child: RotationTransition(
+                    //     turns: const AlwaysStoppedAnimation(120 / 360),
+                    //     child: SvgPicture.asset(
+                    //       'assets/svg/figure1.svg',
+                    //     ),
+                    //   ),
+                    // ),
+                    // Positioned(
+                    //   right: 110,
+                    //   bottom: 280,
+                    //   child: SvgPicture.asset(
+                    //     'assets/svg/figure1.svg',
+                    //   ),
+                    // ),
+                    Positioned(
+                        left: 40,
+                        bottom: MediaQuery.of(context).size.height * 0.2,
+                        child: const Text(
+                          'Добро\nПожаловать',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                              fontSize: 34.0),
+                        )),
+                  ]),
+                  expandedHeight: MediaQuery.of(context).size.height * 0.4,
+                ),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) => ListTile(title: Text('Item #$index')),
+                    childCount: 1,
+                  ),
+                ),
+              ],
+            );
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -90,7 +152,9 @@ class AuthenticationScreenState extends State<AuthenticationScreen>
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
-                      TextFormFieldItem(labelText: 'Фио',),
+                      TextFormFieldItem(
+                        labelText: 'Фио',
+                      ),
                       const Text('Телефон'),
                       SvgPicture.asset(
                         'assets/svg/figure1.svg',
@@ -110,28 +174,26 @@ class AuthenticationScreenState extends State<AuthenticationScreen>
   }
 }
 
-class Circle extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint();
-    paint.color = Colors.white;
-    paint.style = PaintingStyle.fill;
-    paint.strokeCap = StrokeCap.round;
-    paint.strokeJoin = StrokeJoin.round;
-
-    Offset offset = const Offset(1, 1);
-    canvas.drawCircle(offset, 7, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
-  }
-}
-
 class MyShape extends CustomPainter {
   @override
   Future<void> paint(Canvas canvas, Size size) async {
+//     final DrawableRoot svgRoot = await svg.fromSvgString('assets/svg/figure1.svg','assets/svg/figure1.svg',);
+//     Size desiredSize = Size(60, 40);
+// // get the svg from a preloaded array of DrawableRoot corresponding to all the Svg I might use
+//     final DrawableRoot svgRoot = drawables[i];
+//     canvas.save();
+// // [center] below is the Offset of the center of the area where I want the Svg to be drawn
+//     canvas.translate(
+//         center.dx - desiredSize.width / 2, center.dy - desiredSize.height / 2);
+//     Size svgSize = svgRoot.viewport.size;
+//     var matrix = Matrix4.identity();
+//     matrix.scale(
+//         desiredSize.width / svgSize.width, desiredSize.height / svgSize.height);
+//     canvas.transform(matrix.storage);
+//     svgRoot.draw(canvas,
+//         Rect.zero); // the second argument is not used in DrawableRoot.draw() method
+//     canvas.restore();
+
     final pathLeftBottom = Path()
       ..moveTo(0, size.height * 0.9)
       ..quadraticBezierTo(
@@ -302,8 +364,6 @@ class MyShape extends CustomPainter {
     paintCircleTop.strokeJoin = StrokeJoin.round;
     canvas.drawCircle(
         Offset(size.width * 0.27, size.height * 0.22), 7, paintCircleTop);
-
-    
   }
 
   @override
