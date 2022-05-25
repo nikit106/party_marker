@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:party_maker/blocs/blocs.dart';
-import 'dart:math' as math;
+import 'package:party_maker/ui_elements/uiElements.dart';
 
 class AuthenticationScreen extends StatefulWidget {
   const AuthenticationScreen();
@@ -37,7 +39,7 @@ class AuthenticationScreenState extends State<AuthenticationScreen>
                 Container(
                   height: MediaQuery.of(context).size.height * 0.50,
                   width: double.infinity,
-                  color: Color(0xffFA3855),
+                  color: const Color(0xffFA3855),
                   child: Stack(children: [
                     Positioned(
                       child: CustomPaint(
@@ -45,15 +47,33 @@ class AuthenticationScreenState extends State<AuthenticationScreen>
                         child: Container(),
                       ),
                     ),
-                    // Positioned(
-                    //     right: 110,
-                    //     bottom: 60,
-                    //     child: CustomPaint(painter: Circle())),
-                    // Positioned(
-                    //     left: 100,
-                    //     top: 80,
-                    //     child: CustomPaint(painter: Circle())),
-                    // CustomPaint(painter: Circle()),
+                    Positioned(
+                      right: MediaQuery.of(context).size.width * 0.50,
+                      bottom: 90,
+                      child: RotationTransition(
+                        turns: const AlwaysStoppedAnimation(280 / 360),
+                        child: SvgPicture.asset(
+                          'assets/svg/figure1.svg',
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      left: 30,
+                      top: 130,
+                      child: RotationTransition(
+                        turns: const AlwaysStoppedAnimation(120 / 360),
+                        child: SvgPicture.asset(
+                          'assets/svg/figure1.svg',
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      right: 110,
+                      bottom: 280,
+                      child: SvgPicture.asset(
+                        'assets/svg/figure1.svg',
+                      ),
+                    ),
                     Positioned(
                         left: 40,
                         bottom: MediaQuery.of(context).size.height * 0.2,
@@ -66,13 +86,20 @@ class AuthenticationScreenState extends State<AuthenticationScreen>
                         )),
                   ]),
                 ),
-                Column(
-                  children: [
-                    Text('Фио'),
-                    Text('Телефон'),
-                    Text('Пароль'),
-                    Text('Подтвердите пароль'),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      TextFormFieldItem(labelText: 'Фио',),
+                      const Text('Телефон'),
+                      SvgPicture.asset(
+                        'assets/svg/figure1.svg',
+                        color: Colors.red,
+                      ),
+                      const Text('Пароль'),
+                      const Text('Подтвердите пароль'),
+                    ],
+                  ),
                 )
               ],
             );
@@ -92,7 +119,7 @@ class Circle extends CustomPainter {
     paint.strokeCap = StrokeCap.round;
     paint.strokeJoin = StrokeJoin.round;
 
-    Offset offset = Offset(1, 1);
+    Offset offset = const Offset(1, 1);
     canvas.drawCircle(offset, 7, paint);
   }
 
@@ -104,7 +131,7 @@ class Circle extends CustomPainter {
 
 class MyShape extends CustomPainter {
   @override
-  void paint(Canvas canvas, Size size) {
+  Future<void> paint(Canvas canvas, Size size) async {
     final pathLeftBottom = Path()
       ..moveTo(0, size.height * 0.9)
       ..quadraticBezierTo(
@@ -115,12 +142,83 @@ class MyShape extends CustomPainter {
           size.width * 0.34, // конечная точка по горизонтале
           size.height // конечная точка по вертикале
           );
-
     final paintLeftBottom = Paint()
       ..color = Colors.white
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2;
     canvas.drawPath(pathLeftBottom, paintLeftBottom);
+
+    final pathRightTopSmall = Path()
+      ..moveTo(size.width * 0.7, size.height * 0.14)
+      ..quadraticBezierTo(
+          size.width *
+              0.68, // максимальное значение по горизонтале наивышей точки
+          size.height *
+              0.2, // максимальное значение по вертикале наивышей точки
+          size.width * 0.74, // конечная точка по горизонтале
+          size.height * 0.2 // конечная точка по вертикале
+          )
+      ..quadraticBezierTo(
+          size.width *
+              0.8, // максимальное значение по горизонтале наивышей точки
+          size.height *
+              0.18, // максимальное значение по вертикале наивышей точки
+          size.width * 0.87, // конечная точка по горизонтале
+          size.height * 0.26 // конечная точка по вертикале
+          )
+      ..quadraticBezierTo(
+          size.width *
+              0.89, // максимальное значение по горизонтале наивышей точки
+          size.height *
+              0.33, // максимальное значение по вертикале наивышей точки
+          size.width * 0.94, // конечная точка по горизонтале
+          size.height * 0.29 // конечная точка по вертикале
+          )
+      ..lineTo(
+        size.width,
+        size.height * 0.26,
+      );
+    final paintRightTopSmall = Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2;
+    canvas.drawPath(pathRightTopSmall, paintRightTopSmall);
+
+    final pathRightTopBig = Path()
+      ..moveTo(size.width * 0.62, size.height * 0.14)
+      ..quadraticBezierTo(
+          size.width *
+              0.6, // максимальное значение по горизонтале наивышей точки
+          size.height *
+              0.25, // максимальное значение по вертикале наивышей точки
+          size.width * 0.72, // конечная точка по горизонтале
+          size.height * 0.25 // конечная точка по вертикале
+          )
+      ..quadraticBezierTo(
+          size.width *
+              0.8, // максимальное значение по горизонтале наивышей точки
+          size.height *
+              0.24, // максимальное значение по вертикале наивышей точки
+          size.width * 0.83, // конечная точка по горизонтале
+          size.height * 0.29 // конечная точка по вертикале
+          )
+      ..quadraticBezierTo(
+          size.width *
+              0.88, // максимальное значение по горизонтале наивышей точки
+          size.height *
+              0.36, // максимальное значение по вертикале наивышей точки
+          size.width * 0.93, // конечная точка по горизонтале
+          size.height * 0.33 // конечная точка по вертикале
+          )
+      ..lineTo(
+        size.width,
+        size.height * 0.3,
+      );
+    final paintRightTopBig = Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2;
+    canvas.drawPath(pathRightTopBig, paintRightTopBig);
 
     final pathRightBottomSmall = Path()
       ..moveTo(size.width, size.height * 0.87)
@@ -195,13 +293,17 @@ class MyShape extends CustomPainter {
     paintCircleBottom.style = PaintingStyle.fill;
     paintCircleBottom.strokeCap = StrokeCap.round;
     paintCircleBottom.strokeJoin = StrokeJoin.round;
-    canvas.drawCircle(Offset(size.width * 0.77, size.height * 0.87), 7, paintCircleBottom);
+    canvas.drawCircle(
+        Offset(size.width * 0.77, size.height * 0.87), 7, paintCircleBottom);
     Paint paintCircleTop = Paint();
     paintCircleTop.color = Colors.white;
     paintCircleTop.style = PaintingStyle.fill;
     paintCircleTop.strokeCap = StrokeCap.round;
     paintCircleTop.strokeJoin = StrokeJoin.round;
-    canvas.drawCircle(Offset(size.width * 0.27, size.height * 0.22), 7, paintCircleTop);
+    canvas.drawCircle(
+        Offset(size.width * 0.27, size.height * 0.22), 7, paintCircleTop);
+
+    
   }
 
   @override
