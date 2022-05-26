@@ -47,33 +47,6 @@ class AuthenticationScreenState extends State<AuthenticationScreen>
                         child: Container(),
                       ),
                     ),
-                    // Positioned(
-                    //   right: MediaQuery.of(context).size.width * 0.50,
-                    //   bottom: 90,
-                    //   child: RotationTransition(
-                    //     turns: const AlwaysStoppedAnimation(280 / 360),
-                    //     child: SvgPicture.asset(
-                    //       'assets/svg/figure1.svg',
-                    //     ),
-                    //   ),
-                    // ),
-                    // Positioned(
-                    //   left: 30,
-                    //   top: 130,
-                    //   child: RotationTransition(
-                    //     turns: const AlwaysStoppedAnimation(120 / 360),
-                    //     child: SvgPicture.asset(
-                    //       'assets/svg/figure1.svg',
-                    //     ),
-                    //   ),
-                    // ),
-                    // Positioned(
-                    //   right: 110,
-                    //   bottom: 280,
-                    //   child: SvgPicture.asset(
-                    //     'assets/svg/figure1.svg',
-                    //   ),
-                    // ),
                     Positioned(
                         left: 40,
                         bottom: MediaQuery.of(context).size.height * 0.2,
@@ -85,86 +58,62 @@ class AuthenticationScreenState extends State<AuthenticationScreen>
                               fontSize: 34.0),
                         )),
                   ]),
-                  expandedHeight: MediaQuery.of(context).size.height * 0.4,
+                  expandedHeight: MediaQuery.of(context).size.height * 0.45,
                 ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) => ListTile(title: Text('Item #$index')),
-                    childCount: 1,
-                  ),
-                ),
-              ],
-            );
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.50,
-                  width: double.infinity,
-                  color: const Color(0xffFA3855),
-                  child: Stack(children: [
-                    Positioned(
-                      child: CustomPaint(
-                        painter: MyShape(),
-                        child: Container(),
-                      ),
-                    ),
-                    Positioned(
-                      right: MediaQuery.of(context).size.width * 0.50,
-                      bottom: 90,
-                      child: RotationTransition(
-                        turns: const AlwaysStoppedAnimation(280 / 360),
-                        child: SvgPicture.asset(
-                          'assets/svg/figure1.svg',
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      left: 30,
-                      top: 130,
-                      child: RotationTransition(
-                        turns: const AlwaysStoppedAnimation(120 / 360),
-                        child: SvgPicture.asset(
-                          'assets/svg/figure1.svg',
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      right: 110,
-                      bottom: 280,
-                      child: SvgPicture.asset(
-                        'assets/svg/figure1.svg',
-                      ),
-                    ),
-                    Positioned(
-                        left: 40,
-                        bottom: MediaQuery.of(context).size.height * 0.2,
-                        child: const Text(
-                          'Добро\nПожаловать',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white,
-                              fontSize: 34.0),
-                        )),
-                  ]),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                SliverToBoxAdapter(
+                    child: Padding(
+                  padding: const EdgeInsets.all(28.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      TextFormFieldItem(
-                        labelText: 'Фио',
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 24.0),
+                        child: TextFormFieldItem(
+                          labelText: 'Телефон',
+                        ),
                       ),
-                      const Text('Телефон'),
-                      SvgPicture.asset(
-                        'assets/svg/figure1.svg',
-                        color: Colors.red,
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: 10.0,
+                        ),
+                        child: TextFormFieldItem(
+                          labelText: 'Пароль',
+                        ),
                       ),
-                      const Text('Пароль'),
-                      const Text('Подтвердите пароль'),
+                      ButtonItem(
+                        text: 'Войти',
+                        onPressed: () => print('1'),
+                      ),
+                      GestureDetector(
+                        onTap: () => print('1'),
+                        child: const Text(
+                          'Забыли пароль?',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xffFA3855),
+                              fontSize: 14.0),
+                        ),
+                      ),
+                      IntrinsicHeight(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Divider(
+                              color: Colors.red,
+                              height: 10,
+                              thickness: 10,
+                            ),
+                            Text('или'),
+                            Divider(
+                              color: Color(0xffE6E6E6),
+                              height: 2,
+                            ),
+                          ],
+                        ),
+                      )
                     ],
                   ),
-                )
+                ))
               ],
             );
           },
@@ -177,23 +126,6 @@ class AuthenticationScreenState extends State<AuthenticationScreen>
 class MyShape extends CustomPainter {
   @override
   Future<void> paint(Canvas canvas, Size size) async {
-//     final DrawableRoot svgRoot = await svg.fromSvgString('assets/svg/figure1.svg','assets/svg/figure1.svg',);
-//     Size desiredSize = Size(60, 40);
-// // get the svg from a preloaded array of DrawableRoot corresponding to all the Svg I might use
-//     final DrawableRoot svgRoot = drawables[i];
-//     canvas.save();
-// // [center] below is the Offset of the center of the area where I want the Svg to be drawn
-//     canvas.translate(
-//         center.dx - desiredSize.width / 2, center.dy - desiredSize.height / 2);
-//     Size svgSize = svgRoot.viewport.size;
-//     var matrix = Matrix4.identity();
-//     matrix.scale(
-//         desiredSize.width / svgSize.width, desiredSize.height / svgSize.height);
-//     canvas.transform(matrix.storage);
-//     svgRoot.draw(canvas,
-//         Rect.zero); // the second argument is not used in DrawableRoot.draw() method
-//     canvas.restore();
-
     final pathLeftBottom = Path()
       ..moveTo(0, size.height * 0.9)
       ..quadraticBezierTo(

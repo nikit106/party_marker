@@ -43,31 +43,36 @@ class TextFormFieldItemState extends State<TextFormFieldItem> {
         // widget.onChange() ?? null;
       },
       // validator: (input) {},
-      style: const TextStyle(color: Color(0xff000000)),
-      cursorColor: const Color(0xff003356),
+      style: const TextStyle(color: Color(0xff000000), fontSize: 14),
+      // cursorColor: const Color(0xff003356),
       // obscureText: widget.obscureText,
       decoration: InputDecoration(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 10),
         focusedErrorBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xffE21A1A), width: 0.0),
+          borderSide: BorderSide(color: Color(0xff000000), width: 0.0),
         ),
         disabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xff003356), width: 0.0),
+          borderSide: BorderSide(color: Color(0xff000000), width: 0.0),
         ),
         enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xff003356), width: 0.0),
+          borderSide: BorderSide(color: Color(0xff000000), width: 0.0),
         ),
         focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xff003356), width: 0.0),
+          borderSide: BorderSide(color: Color(0xff000000), width: 0.0),
         ),
         errorBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Color(0xffE21A1A), width: 0.0),
         ),
         // errorText: widget.errorText,
+        
         filled: true,
         border: UnderlineInputBorder(borderRadius: BorderRadius.circular(12)),
         fillColor: Colors.white,
-        labelStyle: const TextStyle(color: Color(0xff003356)),
+        labelStyle: const TextStyle(color: Colors.black),
         labelText: widget.labelText,
+        floatingLabelStyle: const TextStyle(
+          color: Colors.black
+        )
       ),
     );
   }
