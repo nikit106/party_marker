@@ -8,7 +8,7 @@ class AuthenticationBloc
 
 
   AuthenticationBloc(
-  ) : super(AuthenticationState.open(isLoadingScreen: true)) {
+  ) : super(AuthenticationState.open(screen: 'auth')) {
     on<AppStarted>((event, emit) async {
       await _checkFastEntry(event, emit);
     });
@@ -19,7 +19,7 @@ class AuthenticationBloc
   _checkFastEntry(AppStarted event, Emitter<AuthenticationState> emit) async {
     bool isFastEntry = authenticationService.checkFastEntry();
     emit(AuthenticationState.open(
-      listener: isFastEntry ? 'home' : 'authentication',
+      listener: isFastEntry ? 'home' : 'auth',
     ));
   }
 }

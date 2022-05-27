@@ -4,6 +4,7 @@ class ButtonItem extends StatefulWidget {
   // final String labelText;
   final String text;
   final Function onPressed;
+  final double width;
   // bool obscureText;
   // final String? errorText;
   // final bool needIcon;
@@ -15,6 +16,7 @@ class ButtonItem extends StatefulWidget {
   ButtonItem({
     required this.text,
     required this.onPressed,
+    required this.width,
     // required this.labelText,
     //   this.needBorder = false,
     //   this.obscureText = false,
@@ -38,29 +40,12 @@ class ButtonItemState extends State<ButtonItem> {
     return ElevatedButton(
       style: ButtonStyle(
         fixedSize: MaterialStateProperty.all<Size>(
-            Size(MediaQuery.of(context).size.width, 10)),
-        backgroundColor: MaterialStateProperty.resolveWith<Color>(
-            (final Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return Colors.blueGrey;
-          }
-          return const Color(0xffFA3855);
-        }),
-        foregroundColor: MaterialStateProperty.resolveWith<Color>(
-            (final Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return Colors.white;
-          }
-          return const Color(0xFFffffff);
-        }),
+            Size(widget.width, 10)),
       ),
-      onPressed: () => print('1'),
+      onPressed:null
+      //  () => print('1')
+       ,
       child: Text(widget.text),
     );
-//     OutlineButton(
-//     child: new Text("Button text"),
-//     onPressed: null,
-//     shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
-// ),
   }
 }

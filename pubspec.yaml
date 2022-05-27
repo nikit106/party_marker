@@ -9,12 +9,17 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  # архитектура
   bloc: ^7.0.0
-  flutter_svg: ^1.1.0
   flutter_bloc: ^7.0.0
+  # работа с svg
+  flutter_svg: ^1.1.0
+  # для работы с запросами
   dio: ^4.0.6
   provider: ^6.0.2
-  path_drawing: ^1.0.0
+  # для адаптивного шрифта
+  flutter_screenutil: ^5.5.3+2
+
   
 
 dev_dependencies:
@@ -24,6 +29,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-  #  - assets/images/
+   - assets/images/
   #  - assets/icons/
    - assets/svg/

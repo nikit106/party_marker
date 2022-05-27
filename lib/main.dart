@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:party_maker/route_generators.dart';
 
 import 'blocs/blocs.dart';
+import 'ui_elements/uiElements.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +17,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: AppThemes.mainTheme,
       onGenerateRoute: RouteGenerator.generateRoute,
       localizationsDelegates: const [],
       home: BlocProvider<AuthenticationBloc>(
@@ -23,12 +25,10 @@ class App extends StatelessWidget {
         child: Scaffold(
           body: BlocConsumer<AuthenticationBloc, AuthenticationState>(
               listener: (context, state) {
-            if (state.listener == 'authentication') {
-              print('1');
+            if (state.listener == 'auth') {
               Navigator.of(context).pushNamed('/authentication');
             }
             if (state.listener == 'home') {
-              print('2');
               Navigator.of(context).pushNamed('/home');
             }
           }, builder: (context, state) {
@@ -37,35 +37,5 @@ class App extends StatelessWidget {
         ),
       ),
     );
-    //   child: MaterialApp(
-    //     // builder: DevicePreview.appBuilder as Widget Function(BuildContext, Widget?),
-    //     // locale: DevicePreview.locale(context),
-    //     // theme: ThemeData(fontFamily: 'RussianRail'),
-    //     // debugShowCheckedModeBanner: false,
-    //     localizationsDelegates: const [
-    //       // GlobalMaterialLocalizations.delegate,
-    //       // GlobalWidgetsLocalizations.delegate,
-    //       // GlobalCupertinoLocalizations.delegate,
-    //     ],
-    //     // supportedLocales: const [
-    //     //   Locale("en", ""),
-    //     //   Locale("ru", ""),
-    //     // ],
-    //     // onGenerateRoute: RouteGenerator.generateRoute,
-    //     home: BlocConsumer<AuthenticationBloc, AuthenticationState>(
-    //       listener: (BuildContext context, AuthenticationState state) {},
-    //       builder: (BuildContext context, AuthenticationState state) {
-    //         return Scaffold(
-    //   resizeToAvoidBottomInset: true,
-    //   body: BlocProvider<LoginBloc>(
-    //     create: (BuildContext context) =>
-    //         LoginBloc(loginService: _loginService),
-    //     child: const LoginEventsForm(),
-    //   ),
-    // );
-    //       },
-    //     ),
-    //   ),
-    // );
   }
 }
