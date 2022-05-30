@@ -5,6 +5,7 @@ class ButtonItem extends StatefulWidget {
   final String text;
   final Function onPressed;
   final double width;
+  final bool isValidate;
   // bool obscureText;
   // final String? errorText;
   // final bool needIcon;
@@ -15,6 +16,7 @@ class ButtonItem extends StatefulWidget {
   // final List<TextInputFormatter> textInputFormatter;
   ButtonItem({
     required this.text,
+    this.isValidate = true,
     required this.onPressed,
     required this.width,
     // required this.labelText,
@@ -42,8 +44,8 @@ class ButtonItemState extends State<ButtonItem> {
         fixedSize: MaterialStateProperty.all<Size>(
             Size(widget.width, 10)),
       ),
-      onPressed:null
-      //  () => print('1')
+      onPressed: widget.isValidate ? () => widget.onPressed : null
+      
        ,
       child: Text(widget.text),
     );

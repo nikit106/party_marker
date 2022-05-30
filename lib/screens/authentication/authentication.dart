@@ -24,6 +24,28 @@ class AuthenticationScreenState extends State<AuthenticationScreen>
     super.dispose();
   }
 
+  bool canEnter = false;
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  _onChangePhone(val) {
+    if (_phoneController.text.isNotEmpty &&
+        _passwordController.text.isNotEmpty) {
+      setState(() {
+        canEnter = true;
+      });
+    }
+  }
+
+  _onChangePassword(val) {
+    if (_phoneController.text.isNotEmpty &&
+        _passwordController.text.isNotEmpty) {
+      setState(() {
+        canEnter = true;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AuthenticationBloc>(
@@ -59,65 +81,69 @@ class AuthenticationScreenState extends State<AuthenticationScreen>
                   expandedHeight: MediaQuery.of(context).size.height * 0.45,
                 ),
                 if (state.screen == 'auth')
-                SliverToBoxAdapter(
-                    child: Container(
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(28.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 24.0),
-                          child: TextFormFieldItem(
-                            labelText: 'Телефон',
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            bottom: 10.0,
-                          ),
-                          child: TextFormFieldItem(
-                            labelText: 'Пароль',
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () => print('1'),
-                          child: const Text(
-                            'Забыли пароль?',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xffFA3855),
-                                fontSize: 14.0),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 24),
-                          child: ButtonItem(
-                            text: 'Войти',
-                            width: MediaQuery.of(context).size.width,
-                            onPressed: () => print('1'),
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Text(
-                              'Войти с помощью',
-                              style: TextStyle(
-                                  color: Colors.black, fontSize: 14.0),
+                  SliverToBoxAdapter(
+                      child: Container(
+                    color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(28.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 24.0),
+                            child: TextFormFieldItem(
+                              labelText: 'Телефон',
+                              controller: _phoneController,
+                              onChange: _onChangePhone,
                             ),
-                            Image(
-                              image: AssetImage('assets/images/google.png'),
-                            )
-                          ],
-                        )
-                      ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              bottom: 10.0,
+                            ),
+                            child: TextFormFieldItem(
+                              labelText: 'Пароль',
+                              controller: _passwordController,
+                              onChange: _onChangePassword,
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () => print('1'),
+                            child: const Text(
+                              'Забыли пароль?',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xffFA3855),
+                                  fontSize: 14.0),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 24),
+                            child: ButtonItem(
+                              isValidate: canEnter,
+                              text: 'Войти',
+                              width: MediaQuery.of(context).size.width,
+                              onPressed: () => print('1'),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Text(
+                                'Войти с помощью',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 14.0),
+                              ),
+                              Image(
+                                image: AssetImage('assets/images/google.png'),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                )),
-                if (state.screen == 'forgotPassword')
-                  Text('1')
+                  )),
+                if (state.screen == 'forgotPassword') Text('1')
               ],
             );
           },

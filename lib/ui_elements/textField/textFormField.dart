@@ -6,24 +6,24 @@ class TextFormFieldItem extends StatefulWidget {
   // final String? errorText;
   // final bool needIcon;
   // final bool needBorder;
-  // final TextEditingController controller;
-  // final Function onChange;
+  final TextEditingController? controller;
+  final Function onChange;
   final TextInputType keyboardType;
   // final List<TextInputFormatter> textInputFormatter;
   TextFormFieldItem(
-        {
+        {Key? key, 
         required this.labelText,
       //   this.needBorder = false,
       //   this.obscureText = false,
       //   this.needIcon = false,
       //   this.errorText = null,
-        // required this.controller,
-      //   Function? onChange,
+        this.controller,
+        Function? onChange,
       //   this.textInputFormatter = const [],
         this.keyboardType = TextInputType.text,
       }
-      )
-  // : onChange = onChange ?? (() {})
+      ) 
+  : onChange = onChange ?? (() {}), super(key: key)
   ;
 
   @override
@@ -36,10 +36,10 @@ class TextFormFieldItemState extends State<TextFormFieldItem> {
     return TextFormField(
       // inputFormatters: widget.textInputFormatter,
       keyboardType: widget.keyboardType,
-      // controller: widget.controller,
+      controller: widget.controller,
       // initialValue: '',
       onChanged: (val) {
-        // widget.onChange();
+        widget.onChange(val);
         // widget.onChange() ?? null;
       },
       // validator: (input) {},
