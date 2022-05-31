@@ -6,7 +6,12 @@ class AuthenticationService {
   }
 
 
-    bool loginAttempt() {
-    return true;
+    bool loginAttempt(String login, String password) {
+      if (password == '123') {
+        return true;
+      } else {
+        return false;
+      }
+    
   }
 }

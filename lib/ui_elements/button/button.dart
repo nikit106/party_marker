@@ -44,7 +44,7 @@ class ButtonItemState extends State<ButtonItem> {
         fixedSize: MaterialStateProperty.all<Size>(
             Size(widget.width, 10)),
       ),
-      onPressed: widget.isValidate ? () => widget.onPressed : null
+      onPressed:widget.isValidate ? () => widget.onPressed() : null
       
        ,
       child: Text(widget.text),

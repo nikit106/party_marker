@@ -28,9 +28,9 @@ class AuthenticationBloc
 
 
   _loginAttempt(LoginAttempt event, Emitter<AuthenticationState> emit) async {
-    bool isFastEntry = authenticationService.loginAttempt();
+    bool isFastEntry = authenticationService.loginAttempt(event.login, event.password);
     emit(AuthenticationState.open(
-      listener: isFastEntry ? 'home' : 'auth',
+      listener:isFastEntry ? 'home' : 'error',
     ));
   }
 }

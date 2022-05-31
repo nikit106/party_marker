@@ -15,12 +15,11 @@ class AuthenticationState {
   factory AuthenticationState.open({
     String screen = 'auth',
     String listener = '',
-    Map data = const {},
   }) {
+    print("listener $listener");
     return AuthenticationState(
       screen: 'auth',
       listener: listener,
-      data: data,
     );
   }
 }
