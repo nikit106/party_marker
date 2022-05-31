@@ -28,20 +28,15 @@ class AuthenticationScreenState extends State<AuthenticationScreen>
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  _onChangePhone(val) {
+  _checkButton(val) {
     if (_phoneController.text.isNotEmpty &&
         _passwordController.text.isNotEmpty) {
       setState(() {
         canEnter = true;
       });
-    }
-  }
-
-  _onChangePassword(val) {
-    if (_phoneController.text.isNotEmpty &&
-        _passwordController.text.isNotEmpty) {
+    } else {
       setState(() {
-        canEnter = true;
+        canEnter = false;
       });
     }
   }
@@ -94,7 +89,7 @@ class AuthenticationScreenState extends State<AuthenticationScreen>
                             child: TextFormFieldItem(
                               labelText: 'Телефон',
                               controller: _phoneController,
-                              onChange: _onChangePhone,
+                              onChange: _checkButton,
                             ),
                           ),
                           Padding(
@@ -104,7 +99,7 @@ class AuthenticationScreenState extends State<AuthenticationScreen>
                             child: TextFormFieldItem(
                               labelText: 'Пароль',
                               controller: _passwordController,
-                              onChange: _onChangePassword,
+                              onChange: _checkButton,
                             ),
                           ),
                           GestureDetector(
